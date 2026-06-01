@@ -28,12 +28,12 @@ app.use('/api/expenses', require('./routes/expenses'));
 app.get('/api/health', (req, res) => res.json({ status: 'OK' }));
 
 // Connect to MongoDB
-const MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/expense-tracker';
+const MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/OmniStack1143Gods';
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log('✅ MongoDB connected'))
   .catch((err) => console.error('❌ MongoDB connection error:', err));
 
 // Use 5001 by default to avoid macOS AirPlay conflict on port 5000
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
