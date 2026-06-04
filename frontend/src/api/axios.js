@@ -1,18 +1,24 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: '/api',
-  headers: { 'Content-Type': 'application/json' },
+  baseURL: 'https://expense-tracker-tuj9.onrender.com/api',
+  headers: {
+    'Content-Type': 'application/json',
+  },
 })
 
 // Attach JWT token to every request
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('et_token')
-  if (token) config.headers.Authorization = `Bearer ${token}`
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+
   return config
 })
 
-// Auto-logout on 401
+// Auto-logout on 401 Unauthorized
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -21,6 +27,7 @@ api.interceptors.response.use(
       localStorage.removeItem('et_user')
       window.location.href = '/login'
     }
+
     return Promise.reject(error)
   }
 )
