@@ -7,7 +7,6 @@ dotenv.config();
 
 const app = express();
 
-// Flexible CORS — allows any localhost port (fixes macOS AirPlay port 5000 conflict)
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || /^http:\/\/localhost(:\d+)?$/.test(origin) || /^http:\/\/127\.0\.0\.1(:\d+)?$/.test(origin)) {
@@ -34,6 +33,5 @@ mongoose
   .then(() => console.log('✅ MongoDB connected'))
   .catch((err) => console.error('❌ MongoDB connection error:', err));
 
-// Use 5001 by default to avoid macOS AirPlay conflict on port 5000
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
