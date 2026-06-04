@@ -7,15 +7,15 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || /^http:\/\/localhost(:\d+)?$/.test(origin) || /^http:\/\/127\.0\.0\.1(:\d+)?$/.test(origin)) {
-      return callback(null, true);
-    }
-    callback(new Error('Not allowed by CORS'));
-  },
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: [
+      'https://expense-tracker-lemon-six-27.vercel.app',
+      'http://localhost:5173',
+    ],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
